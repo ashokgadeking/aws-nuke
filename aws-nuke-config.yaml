@@ -1,0 +1,23 @@
+---
+regions:
+- "global" # This is for all global resource types e.g. IAM
+- "us-east-1"
+
+account-blocklist:
+- 000000000000 #prod #leave it like this to bypass nuke prod acct requirement
+
+resource-types:
+  # only nuke these three resources
+  targets:
+  - S3Bucket
+  - EC2Instance
+
+accounts:
+  REPLACE_ME_ACCOUNTID:
+    filters:
+      S3Bucket:
+        - property: "tag:Permanent"
+          value: "True"
+      EC2Instance:
+        - property: "tag:Permanent"
+          value: "True"
